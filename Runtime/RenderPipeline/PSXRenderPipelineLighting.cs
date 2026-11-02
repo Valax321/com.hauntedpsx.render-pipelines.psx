@@ -335,7 +335,11 @@ namespace HauntedPSX.RenderPipelines.PSX.Runtime
                         lightData.Init(ref discLight);
                         break;
                     default:
+#if UNITY_6000_3_OR_NEWER
+                        lightData.InitNoBake(light.GetEntityId());
+#else
                         lightData.InitNoBake(light.GetInstanceID());
+#endif
                         break;
                 }
 
