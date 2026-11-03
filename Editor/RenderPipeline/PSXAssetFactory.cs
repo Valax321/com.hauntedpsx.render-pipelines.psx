@@ -22,12 +22,26 @@ namespace HauntedPSX.RenderPipelines.PSX.Editor
         static void CreatePSXRenderPipelineAsset()
         {
             var icon = EditorGUIUtility.FindTexture("ScriptableObject Icon");
+            
+#if UNITY_6000_7_OR_NEWER
+            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(EntityId.None, ScriptableObject.CreateInstance<DoCreateNewAssetPSXRenderPipelineAsset>(), "PSXRenderPipelineAsset.asset", icon, null);
+#else
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<DoCreateNewAssetPSXRenderPipelineAsset>(), "PSXRenderPipelineAsset.asset", icon, null);
+#endif
         }
 
-        class DoCreateNewAssetPSXRenderPipelineAsset : UnityEditor.ProjectWindowCallback.EndNameEditAction
+        class DoCreateNewAssetPSXRenderPipelineAsset 
+#if UNITY_6000_7_OR_NEWER
+            : UnityEditor.ProjectWindowCallback.AssetCreationEndAction
+#else
+            : UnityEditor.ProjectWindowCallback.EndNameEditAction
+#endif
         {
+#if UNITY_6000_7_OR_NEWER
+            public override void Action(EntityId entityId, string pathName, string resourceFile)
+#else
             public override void Action(int instanceId, string pathName, string resourceFile)
+#endif
             {
                 var newAsset = CreateInstance<PSXRenderPipelineAsset>();
                 newAsset.name = Path.GetFileName(pathName);
@@ -47,12 +61,26 @@ namespace HauntedPSX.RenderPipelines.PSX.Editor
         static void CreatePSXRenderPipelineResources()
         {
             var icon = EditorGUIUtility.FindTexture("ScriptableObject Icon");
+            
+#if UNITY_6000_7_OR_NEWER
+            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(EntityId.None, ScriptableObject.CreateInstance<DoCreateNewAssetPSXRenderPipelineResources>(), "PSXRenderPipelineResources.asset", icon, null);
+#else
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<DoCreateNewAssetPSXRenderPipelineResources>(), "PSXRenderPipelineResources.asset", icon, null);
+#endif
         }
 
-        class DoCreateNewAssetPSXRenderPipelineResources : UnityEditor.ProjectWindowCallback.EndNameEditAction
+        class DoCreateNewAssetPSXRenderPipelineResources
+#if UNITY_6000_7_OR_NEWER
+            : UnityEditor.ProjectWindowCallback.AssetCreationEndAction
+#else
+            : UnityEditor.ProjectWindowCallback.EndNameEditAction
+#endif
         {
+#if UNITY_6000_7_OR_NEWER
+            public override void Action(EntityId entityId, string pathName, string resourceFile)
+#else
             public override void Action(int instanceId, string pathName, string resourceFile)
+#endif
             {
                 var newAsset = CreateInstance<PSXRenderPipelineResources>();
                 newAsset.name = Path.GetFileName(pathName);
