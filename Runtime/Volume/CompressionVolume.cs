@@ -1,11 +1,15 @@
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     [Serializable, VolumeComponentMenu("HauntedPS1/CompressionVolume")]
-    public class CompressionVolume : VolumeComponent
+    public partial class CompressionVolume : VolumeComponent
     {
         [Serializable]
         public enum CompressionMode

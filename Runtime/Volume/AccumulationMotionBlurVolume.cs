@@ -1,11 +1,15 @@
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     [Serializable, VolumeComponentMenu("HauntedPS1/AccumulationMotionBlurVolume")]
-    public class AccumulationMotionBlurVolume : VolumeComponent
+    public partial class AccumulationMotionBlurVolume : VolumeComponent
     {
         public ClampedFloatParameter weight = new ClampedFloatParameter(0.0f, 0.0f, 1.0f);
         public ClampedFloatParameter vignette = new ClampedFloatParameter(0.0f, -1.0f, 1.0f);
