@@ -1,3 +1,4 @@
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -5,38 +6,41 @@ namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
     internal static class PSXStringConstants
     {
-        public static readonly string s_PackagePath = "Packages/com.hauntedpsx.render-pipelines.psx";
-        public static readonly string s_GlobalRenderPipelineStr = "PSXRenderPipeline";
-        public static readonly string s_CommandBufferRenderOpaqueStr = "PSXRenderPipeline.RenderOpaque";
-        public static readonly string s_CommandBufferRenderTransparentStr = "PSXRenderPipeline.RenderTransparent";
-        public static readonly string s_CommandBufferRenderSkyboxStr = "PSXRenderPipeline.RenderSkybox";
-        public static readonly string s_CommandBufferRenderLegacyCanvasUIStr = "PSXRenderPipeline.RenderLegacyCanvasUI";
-        public static readonly string s_CommandBufferRenderForwardStr = "PSXRenderPipeline.RenderForward";
-        public static readonly string s_CommandBufferRenderPreMainStr = "PSXRenderPipeline.RenderPreMain";
-        public static readonly string s_CommandBufferRenderPreUIOverlayStr = "PSXRenderPipeline.RenderPreUIOverlay";
-        public static readonly string s_CommandBufferRenderPostProcessStr = "PSXRenderPipeline.PostProcessing";
+        public const string s_PackagePath = "Packages/com.hauntedpsx.render-pipelines.psx";
+        public const string s_GlobalRenderPipelineStr = "PSXRenderPipeline";
+        public const string s_CommandBufferRenderOpaqueStr = "PSXRenderPipeline.RenderOpaque";
+        public const string s_CommandBufferRenderTransparentStr = "PSXRenderPipeline.RenderTransparent";
+        public const string s_CommandBufferRenderSkyboxStr = "PSXRenderPipeline.RenderSkybox";
+        public const string s_CommandBufferRenderLegacyCanvasUIStr = "PSXRenderPipeline.RenderLegacyCanvasUI";
+        public const string s_CommandBufferRenderForwardStr = "PSXRenderPipeline.RenderForward";
+        public const string s_CommandBufferRenderPreMainStr = "PSXRenderPipeline.RenderPreMain";
+        public const string s_CommandBufferRenderPreUIOverlayStr = "PSXRenderPipeline.RenderPreUIOverlay";
+        public const string s_CommandBufferRenderPostProcessStr = "PSXRenderPipeline.PostProcessing";
     }
 
-    internal static class PSXProfilingSamplers
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
+    internal static partial class PSXProfilingSamplers
     {
-        public static readonly string s_PushCameraParametersStr = "Push Camera Parameters";
-        public static readonly string s_PushGlobalRasterizationParametersStr = "Push Global Rasterization Parameters";
-        public static readonly string s_PushGlobalPostProcessingParametersStr = "Push Global Rasterization Parameters";
-        public static readonly string s_PushSkyParametersStr = "Push Sky Parameters";
-        public static readonly string s_PushQualityOverrideParametersStr = "Push Quality Override Parameters";
-        public static readonly string s_PushTonemapperParametersStr = "Push Tonemapper Parameters";
-        public static readonly string s_PushLightingParametersStr = "Push Lighting Parameters";
-        public static readonly string s_PushDynamicLightingParametersStr = "Push Dynamic Lighting Parameters";
-        public static readonly string s_PreMainParametersStr = "Push Pre Main Parameters";
-        public static readonly string s_PreUIOverlayParametersStr = "Push Pre UI Overlay Parameters";
-        public static readonly string s_PushPrecisionParametersStr = "Push Precision Parameters";
-        public static readonly string s_PushFogParametersStr = "Push Fog Parameters";
-        public static readonly string s_PushCompressionParametersStr = "Push Compression Parameters";
-        public static readonly string s_PushCathodeRayTubeParametersStr = "Push Cathode Ray Tube Parameters";
-        public static readonly string s_DrawAccumulationMotionBlurPreUIOverlayStr = "Accumulation Motion Blur Pre UI Overlay";
-        public static readonly string s_DrawAccumulationMotionBlurPostUIOverlayStr = "Accumulation Motion Blur Post UI Overlay";
-        public static readonly string s_DrawAccumulationMotionBlurFinalBlitStr = "Accumulation Motion Blur Final Blit";
-        public static readonly string s_PushTerrainGrassParametersStr = "Push Terrain Grass Parameters";
+        public const string s_PushCameraParametersStr = "Push Camera Parameters";
+        public const string s_PushGlobalRasterizationParametersStr = "Push Global Rasterization Parameters";
+        public const string s_PushGlobalPostProcessingParametersStr = "Push Global Rasterization Parameters";
+        public const string s_PushSkyParametersStr = "Push Sky Parameters";
+        public const string s_PushQualityOverrideParametersStr = "Push Quality Override Parameters";
+        public const string s_PushTonemapperParametersStr = "Push Tonemapper Parameters";
+        public const string s_PushLightingParametersStr = "Push Lighting Parameters";
+        public const string s_PushDynamicLightingParametersStr = "Push Dynamic Lighting Parameters";
+        public const string s_PreMainParametersStr = "Push Pre Main Parameters";
+        public const string s_PreUIOverlayParametersStr = "Push Pre UI Overlay Parameters";
+        public const string s_PushPrecisionParametersStr = "Push Precision Parameters";
+        public const string s_PushFogParametersStr = "Push Fog Parameters";
+        public const string s_PushCompressionParametersStr = "Push Compression Parameters";
+        public const string s_PushCathodeRayTubeParametersStr = "Push Cathode Ray Tube Parameters";
+        public const string s_DrawAccumulationMotionBlurPreUIOverlayStr = "Accumulation Motion Blur Pre UI Overlay";
+        public const string s_DrawAccumulationMotionBlurPostUIOverlayStr = "Accumulation Motion Blur Post UI Overlay";
+        public const string s_DrawAccumulationMotionBlurFinalBlitStr = "Accumulation Motion Blur Final Blit";
+        public const string s_PushTerrainGrassParametersStr = "Push Terrain Grass Parameters";
 
         public static ProfilingSampler s_PushCameraParameters = new ProfilingSampler(s_PushCameraParametersStr);
         public static ProfilingSampler s_PushGlobalRasterizationParameters = new ProfilingSampler(s_PushGlobalRasterizationParametersStr);
@@ -58,11 +62,14 @@ namespace HauntedPSX.RenderPipelines.PSX.Runtime
         public static ProfilingSampler s_PushTerrainGrassParameters = new ProfilingSampler(s_PushTerrainGrassParametersStr);
     }
 
+#if UNITY_6000_7_OR_NEWER
+    [NoAutoStaticsCleanup]
+#endif
     internal static class PSXShaderPassNames
     {
         // ShaderPass string - use to have consistent naming through the codebase.
-        public static readonly string s_PSXLitStr = "PSXLit";
-        public static readonly string s_SRPDefaultUnlitStr = "SRPDefaultUnlit";
+        public const string s_PSXLitStr = "PSXLit";
+        public const string s_SRPDefaultUnlitStr = "SRPDefaultUnlit";
 
         // ShaderPass name
         public static readonly ShaderTagId s_PSXLit = new ShaderTagId(s_PSXLitStr);
@@ -71,34 +78,37 @@ namespace HauntedPSX.RenderPipelines.PSX.Runtime
 
     internal static class PSXShaderKeywords
     {
-        public static readonly string s_OUTPUT_LDR = "_OUTPUT_LDR";
-        public static readonly string s_OUTPUT_HDR = "_OUTPUT_HDR";
-        public static readonly string s_CRT_MASK_COMPRESSED_TV = "_CRT_MASK_COMPRESSED_TV";
-        public static readonly string s_CRT_MASK_APERATURE_GRILL = "_CRT_MASK_APERTURE_GRILL";
-        public static readonly string s_CRT_MASK_VGA = "_CRT_MASK_VGA";
-        public static readonly string s_CRT_MASK_VGA_STRETCHED = "_CRT_MASK_VGA_STRETCHED";
-        public static readonly string s_CRT_MASK_TEXTURE = "_CRT_MASK_TEXTURE";
-        public static readonly string s_CRT_MASK_DISABLED = "_CRT_MASK_DISABLED";
-        public static readonly string s_SKY_MODE_FOG_COLOR = "_SKY_MODE_FOG_COLOR"; 
-        public static readonly string s_SKY_MODE_BACKGROUND_COLOR = "_SKY_MODE_BACKGROUND_COLOR";
-        public static readonly string s_SKY_MODE_SKYBOX = "_SKY_MODE_SKYBOX";
-        public static readonly string s_SKY_MODE_TILED_LAYERS = "_SKY_MODE_TILED_LAYERS";
-        public static readonly string s_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS = "_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS";
-        public static readonly string s_TEXTURE_FILTER_MODE_POINT = "_TEXTURE_FILTER_MODE_POINT";
-        public static readonly string s_TEXTURE_FILTER_MODE_POINT_MIPMAPS = "_TEXTURE_FILTER_MODE_POINT_MIPMAPS";
-        public static readonly string s_TEXTURE_FILTER_MODE_N64 = "_TEXTURE_FILTER_MODE_N64";
-        public static readonly string s_TEXTURE_FILTER_MODE_N64_MIPMAPS = "_TEXTURE_FILTER_MODE_N64_MIPMAPS";
-        public static readonly string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS";
-        public static readonly string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT";
-        public static readonly string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT_MIPMAPS = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT_MIPMAPS";
-        public static readonly string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64 = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64";
-        public static readonly string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64_MIPMAPS = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64_MIPMAPS";
-        public static readonly string s_FOG_COLOR_LUT_MODE_DISABLED = "_FOG_COLOR_LUT_MODE_DISABLED";
-        public static readonly string s_FOG_COLOR_LUT_MODE_TEXTURE2D_DISTANCE_AND_HEIGHT = "_FOG_COLOR_LUT_MODE_TEXTURE2D_DISTANCE_AND_HEIGHT";
-        public static readonly string s_FOG_COLOR_LUT_MODE_TEXTURECUBE = "_FOG_COLOR_LUT_MODE_TEXTURECUBE";
-        public static readonly string k_LIGHTMAP_SHADOW_MASK = "LIGHTMAP_SHADOW_MASK";
+        public const string s_OUTPUT_LDR = "_OUTPUT_LDR";
+        public const string s_OUTPUT_HDR = "_OUTPUT_HDR";
+        public const string s_CRT_MASK_COMPRESSED_TV = "_CRT_MASK_COMPRESSED_TV";
+        public const string s_CRT_MASK_APERATURE_GRILL = "_CRT_MASK_APERTURE_GRILL";
+        public const string s_CRT_MASK_VGA = "_CRT_MASK_VGA";
+        public const string s_CRT_MASK_VGA_STRETCHED = "_CRT_MASK_VGA_STRETCHED";
+        public const string s_CRT_MASK_TEXTURE = "_CRT_MASK_TEXTURE";
+        public const string s_CRT_MASK_DISABLED = "_CRT_MASK_DISABLED";
+        public const string s_SKY_MODE_FOG_COLOR = "_SKY_MODE_FOG_COLOR"; 
+        public const string s_SKY_MODE_BACKGROUND_COLOR = "_SKY_MODE_BACKGROUND_COLOR";
+        public const string s_SKY_MODE_SKYBOX = "_SKY_MODE_SKYBOX";
+        public const string s_SKY_MODE_TILED_LAYERS = "_SKY_MODE_TILED_LAYERS";
+        public const string s_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS = "_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS";
+        public const string s_TEXTURE_FILTER_MODE_POINT = "_TEXTURE_FILTER_MODE_POINT";
+        public const string s_TEXTURE_FILTER_MODE_POINT_MIPMAPS = "_TEXTURE_FILTER_MODE_POINT_MIPMAPS";
+        public const string s_TEXTURE_FILTER_MODE_N64 = "_TEXTURE_FILTER_MODE_N64";
+        public const string s_TEXTURE_FILTER_MODE_N64_MIPMAPS = "_TEXTURE_FILTER_MODE_N64_MIPMAPS";
+        public const string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_TEXTURE_IMPORT_SETTINGS";
+        public const string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT";
+        public const string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT_MIPMAPS = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_POINT_MIPMAPS";
+        public const string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64 = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64";
+        public const string s_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64_MIPMAPS = "_TERRAIN_GRASS_TEXTURE_FILTER_MODE_N64_MIPMAPS";
+        public const string s_FOG_COLOR_LUT_MODE_DISABLED = "_FOG_COLOR_LUT_MODE_DISABLED";
+        public const string s_FOG_COLOR_LUT_MODE_TEXTURE2D_DISTANCE_AND_HEIGHT = "_FOG_COLOR_LUT_MODE_TEXTURE2D_DISTANCE_AND_HEIGHT";
+        public const string s_FOG_COLOR_LUT_MODE_TEXTURECUBE = "_FOG_COLOR_LUT_MODE_TEXTURECUBE";
+        public const string k_LIGHTMAP_SHADOW_MASK = "LIGHTMAP_SHADOW_MASK";
     }
 
+#if UNITY_6000_7_OR_NEWER
+    [NoAutoStaticsCleanup]
+#endif
     internal static class PSXComputeKernels
     {
         // WARNING: this kernel name LUT calculation needs to stay in sync the kernel declarations in compression.compute,
@@ -122,6 +132,9 @@ namespace HauntedPSX.RenderPipelines.PSX.Runtime
 
     // Pre-hashed shader ids to avoid runtime hashing cost, runtime string manipulation, and to ensure we do not have naming conflicts across
     // all global shader uniforms.
+#if UNITY_6000_7_OR_NEWER
+    [NoAutoStaticsCleanup]
+#endif
     internal static class PSXShaderIDs
     {
         public static readonly int _ScreenSize = Shader.PropertyToID("_ScreenSize");

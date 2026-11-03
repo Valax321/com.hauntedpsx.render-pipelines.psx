@@ -4,12 +4,16 @@ using UnityEngine.Rendering;
 using UnityEditor;
 using UnityEngine.Experimental.Rendering;
 using HauntedPSX.RenderPipelines.PSX.Runtime;
+using Unity.Scripting.LifecycleManagement;
 using static HauntedPSX.RenderPipelines.PSX.Editor.PSXMaterialUtils;
 
 namespace HauntedPSX.RenderPipelines.PSX.Editor
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     // internal class PSXTerrainShaderGUI : UnityEditor.ShaderGUI, ITerrainLayerCustomUI
-    internal class PSXTerrainShaderGUI : UnityEditor.ShaderGUI, ITerrainLayerCustomUI
+    internal partial class PSXTerrainShaderGUI : UnityEditor.ShaderGUI, ITerrainLayerCustomUI
     {
         private class StylesLayer
         {

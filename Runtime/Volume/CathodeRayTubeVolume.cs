@@ -1,11 +1,15 @@
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     [Serializable, VolumeComponentMenu("HauntedPS1/Cathode Ray Tube")]
-    public class CathodeRayTubeVolume : VolumeComponent
+    public partial class CathodeRayTubeVolume : VolumeComponent
     {
         [Serializable]
         public enum CRTGrateMaskMode

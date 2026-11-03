@@ -1,11 +1,15 @@
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     [Serializable, VolumeComponentMenu("HauntedPS1/TonemapperVolume")]
-    public class TonemapperVolume : VolumeComponent
+    public partial class TonemapperVolume : VolumeComponent
     {
         public BoolParameter isEnabled = new BoolParameter(false);
         public ClampedFloatParameter contrast = new ClampedFloatParameter(0.5f, 0.0f, 1.0f);

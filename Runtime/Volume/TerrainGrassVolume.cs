@@ -1,11 +1,15 @@
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     [Serializable, VolumeComponentMenu("HauntedPS1/TerrainGrassVolume")]
-    public class TerrainGrassVolume : VolumeComponent
+    public partial class TerrainGrassVolume : VolumeComponent
     {
         // TODO: This type was copied from the editor-only PSXMaterialUtils static class.
         // Should look into creating a runtime static class for these types to be shared across editor and runtime (i.e: PSXMaterialTypes? PSXTypes?)

@@ -5,10 +5,14 @@ using UnityEngine.Experimental.Rendering;
 using System.Collections.Generic;
 using UnityEditor;
 using System.ComponentModel;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine.Rendering.RendererUtils;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     public partial class PSXRenderPipeline : UnityEngine.Rendering.RenderPipeline
     {
         readonly PSXRenderPipelineAsset m_Asset;

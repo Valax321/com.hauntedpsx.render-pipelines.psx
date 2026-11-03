@@ -1,11 +1,15 @@
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     [Serializable, VolumeComponentMenu("HauntedPS1/QualityOverrideVolume")]
-    public class QualityOverrideVolume : VolumeComponent
+    public partial class QualityOverrideVolume : VolumeComponent
     {
         // Default to PSX Quality Disabled so that prefab editing is easier
         // (most of the time you do not want to edit prefabs with low / pixelated / CRT settings on)

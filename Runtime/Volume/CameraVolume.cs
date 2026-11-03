@@ -1,11 +1,15 @@
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
     [Serializable, VolumeComponentMenu("HauntedPS1/CameraVolume")]
-    public class CameraVolume : VolumeComponent
+    public partial class CameraVolume : VolumeComponent
     {
         [Serializable]
         public enum CameraAspectMode

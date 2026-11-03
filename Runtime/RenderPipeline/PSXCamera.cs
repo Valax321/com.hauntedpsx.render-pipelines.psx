@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using System;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine.Experimental.Rendering;
 
 namespace HauntedPSX.RenderPipelines.PSX.Runtime
 {
     // AllocHistoryFrameRT
-    public class PSXCamera
+#if UNITY_6000_7_OR_NEWER
+    [AutoStaticsCleanup]
+#endif
+    public partial class PSXCamera
     {
         private static Dictionary<Camera, PSXCamera> s_Cameras = new Dictionary<Camera, PSXCamera>();
         private static List<Camera> s_Cleanup = new List<Camera>(); // Recycled to reduce GC pressure
