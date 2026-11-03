@@ -52,44 +52,5 @@ namespace HauntedPSX.RenderPipelines.PSX.Editor
                 ProjectWindowUtil.ShowCreatedAsset(newAsset);
             }
         }
-
-#if UNITY_2021_2_OR_NEWER
-        [MenuItem("HauntedPS1/Create HauntedPS1 Render Pipeline Resources", priority = CoreUtils.Priorities.assetsCreateRenderingMenuPriority)]
-#else
-        [MenuItem("HauntedPS1/Create HauntedPS1 Render Pipeline Resources", priority = CoreUtils.assetCreateMenuPriority1)]
-#endif
-        static void CreatePSXRenderPipelineResources()
-        {
-            var icon = EditorGUIUtility.FindTexture("ScriptableObject Icon");
-            
-#if UNITY_6000_7_OR_NEWER
-            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(EntityId.None, ScriptableObject.CreateInstance<DoCreateNewAssetPSXRenderPipelineResources>(), "PSXRenderPipelineResources.asset", icon, null);
-#else
-            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(0, ScriptableObject.CreateInstance<DoCreateNewAssetPSXRenderPipelineResources>(), "PSXRenderPipelineResources.asset", icon, null);
-#endif
-        }
-
-        class DoCreateNewAssetPSXRenderPipelineResources
-#if UNITY_6000_7_OR_NEWER
-            : UnityEditor.ProjectWindowCallback.AssetCreationEndAction
-#else
-            : UnityEditor.ProjectWindowCallback.EndNameEditAction
-#endif
-        {
-#if UNITY_6000_7_OR_NEWER
-            public override void Action(EntityId entityId, string pathName, string resourceFile)
-#else
-            public override void Action(int instanceId, string pathName, string resourceFile)
-#endif
-            {
-                var newAsset = CreateInstance<PSXRenderPipelineResources>();
-                newAsset.name = Path.GetFileName(pathName);
-
-                ResourceReloader.ReloadAllNullIn(newAsset, s_PackagePath);
-
-                AssetDatabase.CreateAsset(newAsset, pathName);
-                ProjectWindowUtil.ShowCreatedAsset(newAsset);
-            }
-        }
     }
 }

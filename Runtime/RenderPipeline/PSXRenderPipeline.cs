@@ -51,7 +51,11 @@ namespace HauntedPSX.RenderPipelines.PSX.Runtime
         static void InitializeVolumeManager()
         {
 #if UNITY_2023_2_OR_NEWER
-            if (!VolumeManager.instance.isInitialized) { VolumeManager.instance.Initialize(); }
+            if (!VolumeManager.instance.isInitialized)
+            {
+                var settings = GraphicsSettings.GetRenderPipelineSettings<PSXDefaultVolumeProfileSettings>();
+                VolumeManager.instance.Initialize(settings.volumeProfile);
+            }
 #endif
         }
 
