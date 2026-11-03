@@ -1061,7 +1061,11 @@ namespace HauntedPSX.RenderPipelines.PSX.Editor
             // HPSXRP does not support RealtimeEmissive. We set it to bake emissive and handle the emissive is black right.
             if (emissive)
             {
+#if UNITY_6000_7_OR_NEWER
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.BakedEmission;
+#else
                 material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.BakedEmissive;
+#endif
                 if (brightness <= 0f)
                     material.globalIlluminationFlags |= MaterialGlobalIlluminationFlags.EmissiveIsBlack;
             }
